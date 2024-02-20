@@ -1,30 +1,42 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+<div id="app">
+<Header></Header>
+<Content />
+<Footer @onClock='onClock' title="Copyright 2024 by GRIS"></Footer>
+<div class='clock'>{{time}}</div>
+</div>
+
+
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import Header from "@/components/layouts/header.vue"
+import Footer from "@/components/layouts/footer.vue"
+import Content from "@/components/layouts/content.vue"
+import moment from "moment"
+
+export default {
+  name:"app",
+  components:{
+    Header,Footer,Content
+  },
+  methods: {
+    onClock(value){
+      this.time = moment(value).format('MM/DD/YYYY')
+  }
+  },
+  data() {
+    return {
+      time:''
+    }
+  },
 }
 
-nav {
-  padding: 30px;
-}
+</script>
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
+<style scoped>
+  .clock{
+    font-size: 12px;
+    color: blue;
+  }
 </style>
